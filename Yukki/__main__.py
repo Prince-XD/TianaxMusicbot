@@ -236,13 +236,13 @@ A Telegram Music+Video Streaming bot with some useful features.
 All commands can be used with: / """
 
 
-@app.on_message(filters.command("help") & filters.private)
+@app.on_message(filters.command("vchelp") & filters.private)
 async def help_command(_, message):
     text, keyboard = await help_parser(message.from_user.mention)
     await app.send_message(message.chat.id, text, reply_markup=keyboard)
 
 
-@app.on_message(filters.command("start") & filters.private)
+@app.on_message(filters.command("vcstart") & filters.private)
 async def start_command(_, message):
     if len(message.text.split()) > 1:
         name = (message.text.split(None, 1)[1]).lower()
@@ -391,14 +391,14 @@ async def shikhar(_, CallbackQuery):
     await CallbackQuery.message.edit(text, reply_markup=keyboard)
 
 
-@app.on_callback_query(filters.regex(r"help_(.*?)"))
+@app.on_callback_query(filters.regex(r"music_(.*?)"))
 async def help_button(client, query):
-    home_match = re.match(r"help_home\((.+?)\)", query.data)
-    mod_match = re.match(r"help_module\((.+?)\)", query.data)
-    prev_match = re.match(r"help_prev\((.+?)\)", query.data)
-    next_match = re.match(r"help_next\((.+?)\)", query.data)
-    back_match = re.match(r"help_back", query.data)
-    create_match = re.match(r"help_create", query.data)
+    home_match = re.match(r"music_home\((.+?)\)", query.data)
+    mod_match = re.match(r"music_module\((.+?)\)", query.data)
+    prev_match = re.match(r"music_prev\((.+?)\)", query.data)
+    next_match = re.match(r"music_next\((.+?)\)", query.data)
+    back_match = re.match(r"music_back", query.data)
+    create_match = re.match(r"music_create", query.data)
     top_text = f"""Hello {query.from_user.first_name},
 
 Click on the buttons for more information.
@@ -417,10 +417,10 @@ All commands can be used with: /
             [
                 [
                     InlineKeyboardButton(
-                        text="↪️ Back", callback_data="help_back"
+                        text="Back", callback_data="music_back"
                     ),
                     InlineKeyboardButton(
-                        text="🔄 Close", callback_data="close"
+                        text="Home", callback_data="tiana_music"
                     ),
                 ],
             ]
@@ -444,7 +444,7 @@ All commands can be used with: /
         await query.message.edit(
             text=top_text,
             reply_markup=InlineKeyboardMarkup(
-                paginate_modules(curr_page - 1, HELPABLE, "help")
+                paginate_modules(curr_page - 1, HELPABLE, "music")
             ),
             disable_web_page_preview=True,
         )
@@ -454,7 +454,7 @@ All commands can be used with: /
         await query.message.edit(
             text=top_text,
             reply_markup=InlineKeyboardMarkup(
-                paginate_modules(next_page + 1, HELPABLE, "help")
+                paginate_modules(next_page + 1, HELPABLE, "music")
             ),
             disable_web_page_preview=True,
         )
@@ -463,7 +463,7 @@ All commands can be used with: /
         await query.message.edit(
             text=top_text,
             reply_markup=InlineKeyboardMarkup(
-                paginate_modules(0, HELPABLE, "help")
+                paginate_modules(0, HELPABLE, "music")
             ),
             disable_web_page_preview=True,
         )
