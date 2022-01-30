@@ -237,13 +237,13 @@ All commands can be used with: / """
 
 
 @app.on_message(filters.command("vchelp") & filters.private)
-async def help_command(_, message):
-    text, keyboard = await help_parser(message.from_user.mention)
+async def vchelp_command(_, message):
+    text, keyboard = await lovely_parser(message.from_user.mention)
     await app.send_message(message.chat.id, text, reply_markup=keyboard)
 
 
 @app.on_message(filters.command("vcstart") & filters.private)
-async def start_command(_, message):
+async def vcstart_command(_, message):
     if len(message.text.split()) > 1:
         name = (message.text.split(None, 1)[1]).lower()
         if name[0] == "s":
@@ -290,7 +290,7 @@ async def start_command(_, message):
                     f"{message.from_user.mention} has just started bot to check <code>SUDOLIST</code>\n\n**USER ID:** {sender_id}\n**USER NAME:** {sender_name}",
                 )
         if name == "help":
-            text, keyboard = await help_parser(message.from_user.mention)
+            text, keyboard = await lovely_parser(message.from_user.mention)
             await message.delete()
             return await app.send_text(
                 message.chat.id,
@@ -328,10 +328,10 @@ async def start_command(_, message):
                 [
                     [
                         InlineKeyboardButton(
-                            text="🎥 Watch Youtube Video", url=f"{link}"
+                            text=" Watch Youtube Video", url=f"{link}"
                         ),
                         InlineKeyboardButton(
-                            text="🔄 Close", callback_data="close"
+                            text="Close", callback_data="close"
                         ),
                     ],
                 ]
@@ -369,9 +369,9 @@ async def start_command(_, message):
     return
 
 
-async def help_parser(name, keyboard=None):
+async def lovely_parser(name, keyboard=None):
     if not keyboard:
-        keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
+        keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "lovely"))
     return (
         """Hello {first_name},
 
@@ -387,18 +387,18 @@ All commands can be used with: /
 
 @app.on_callback_query(filters.regex("shikhar"))
 async def shikhar(_, CallbackQuery):
-    text, keyboard = await help_parser(CallbackQuery.from_user.mention)
+    text, keyboard = await lovely_parser(CallbackQuery.from_user.mention)
     await CallbackQuery.message.edit(text, reply_markup=keyboard)
 
 
-@app.on_callback_query(filters.regex(r"music_(.*?)"))
+@app.on_callback_query(filters.regex(r"lovely_(.*?)"))
 async def help_button(client, query):
-    home_match = re.match(r"music_home\((.+?)\)", query.data)
-    mod_match = re.match(r"music_module\((.+?)\)", query.data)
-    prev_match = re.match(r"music_prev\((.+?)\)", query.data)
-    next_match = re.match(r"music_next\((.+?)\)", query.data)
-    back_match = re.match(r"music_back", query.data)
-    create_match = re.match(r"music_create", query.data)
+    home_match = re.match(r"lovely_home\((.+?)\)", query.data)
+    mod_match = re.match(r"lovely_module\((.+?)\)", query.data)
+    prev_match = re.match(r"lovely_prev\((.+?)\)", query.data)
+    next_match = re.match(r"lovely_next\((.+?)\)", query.data)
+    back_match = re.match(r"lovely_back", query.data)
+    create_match = re.match(r"lovely_create", query.data)
     top_text = f"""Hello {query.from_user.first_name},
 
 Click on the buttons for more information.
@@ -417,7 +417,7 @@ All commands can be used with: /
             [
                 [
                     InlineKeyboardButton(
-                        text="Back", callback_data="music_back"
+                        text="Back", callback_data="lovely_back"
                     ),
                     InlineKeyboardButton(
                         text="Home", callback_data="tiana_music"
@@ -444,7 +444,7 @@ All commands can be used with: /
         await query.message.edit(
             text=top_text,
             reply_markup=InlineKeyboardMarkup(
-                paginate_modules(curr_page - 1, HELPABLE, "music")
+                paginate_modules(curr_page - 1, HELPABLE, "lovely")
             ),
             disable_web_page_preview=True,
         )
@@ -454,7 +454,7 @@ All commands can be used with: /
         await query.message.edit(
             text=top_text,
             reply_markup=InlineKeyboardMarkup(
-                paginate_modules(next_page + 1, HELPABLE, "music")
+                paginate_modules(next_page + 1, HELPABLE, "lovely")
             ),
             disable_web_page_preview=True,
         )
@@ -463,13 +463,13 @@ All commands can be used with: /
         await query.message.edit(
             text=top_text,
             reply_markup=InlineKeyboardMarkup(
-                paginate_modules(0, HELPABLE, "music")
+                paginate_modules(0, HELPABLE, "lovely")
             ),
             disable_web_page_preview=True,
         )
 
     elif create_match:
-        text, keyboard = await help_parser(query)
+        text, keyboard = await lovely_parser(query)
         await query.message.edit(
             text=text,
             reply_markup=keyboard,
