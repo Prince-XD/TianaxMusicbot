@@ -52,7 +52,7 @@ def paginate_modules(page_n, module_dict, prefix, chat=None):
         pairs.append((modules[-1],))
 
     else:
-        pairs += [[EqInlineKeyboardButton("Go Home", callback_data="tiana_")]]
+        pairs += [[EqInlineKeyboardButton("Back", callback_data="tiana_music")]]
 
     return pairs
 
