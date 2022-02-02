@@ -373,12 +373,7 @@ async def lovely_parser(name, keyboard=None):
     if not keyboard:
         keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "lovely"))
     return (
-        """Hello {first_name},
-
-Click on the buttons for more information.
-
-All commands can be used with: /
-""".format(
+        """× Hᴇʀᴇ Iꜱ Tʜᴇ Cᴏᴍᴍᴀɴᴅ Tꜰ TɪᴀɴᴀMᴜꜱɪᴄ Bᴏᴛ:""".format(
             first_name=name
         ),
         keyboard,
