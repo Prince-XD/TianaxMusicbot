@@ -706,7 +706,8 @@ async def stream_end_handler1(_, update: Update):
     else:
         return
     await playout_end(pytgcalls1, update.chat_id)
-
+    await ASS_CLI_1.send_message(update.chat_id, "<b>•Music PlayBack Ended\n•Assistant Leaving This Group\n•Thanks For Using This Bot•</b>") 
+    await ASS_CLI_1.leave_chat(update.chat_id)
 
 ### Playout End For Client 2
 @pytgcalls2.on_stream_end()
@@ -716,7 +717,8 @@ async def stream_end_handler(_, update: Update):
     else:
         return
     await playout_end(pytgcalls2, update.chat_id)
-
+    await ASS_CLI_2.send_message(update.chat_id, "<b>•Music PlayBack Ended\n•Assistant Leaving This Group\n•Thanks For Using This Bot•</b>") 
+    await ASS_CLI_2.leave_chat(update.chat_id)
 
 ### Playout End For Client 3
 @pytgcalls3.on_stream_end()
@@ -726,7 +728,8 @@ async def stream_end_handler3(_, update: Update):
     else:
         return
     await playout_end(pytgcalls3, update.chat_id)
-
+    await ASS_CLI_3.send_message(update.chat_id, "<b>•Music PlayBack Ended\n•Assistant Leaving This Group\n•Thanks For Using This Bot•</b>") 
+    await ASS_CLI_3.leave_chat(update.chat_id)
 
 ### Playout End For Client 4
 @pytgcalls4.on_stream_end()
@@ -736,7 +739,8 @@ async def stream_end_handler(_, update: Update):
     else:
         return
     await playout_end(pytgcalls4, update.chat_id)
-
+    await ASS_CLI_4.send_message(update.chat_id, "<b>•Music PlayBack Ended\n•Assistant Leaving This Group\n•Thanks For Using This Bot•</b>") 
+    await ASS_CLI_4.leave_chat(update.chat_id)
 
 ### Playout End For Client 5
 @pytgcalls5.on_stream_end()
@@ -746,7 +750,8 @@ async def stream_end_handler5(_, update: Update):
     else:
         return
     await playout_end(pytgcalls5, update.chat_id)
-
+    await ASS_CLI_5.send_message(update.chat_id, "<b>•Music PlayBack Ended\n•Assistant Leaving This Group\n•Thanks For Using This Bot•</b>") 
+    await ASS_CLI_5.leave_chat(update.chat_id)
 
 ### Kicked Handlers
 
@@ -762,7 +767,7 @@ async def kicked_handler2(_, chat_id: int):
 
 
 @pytgcalls3.on_kicked()
-async def kicked_handle3(_, chat_id: int):
+async def kicked_handler3(_, chat_id: int):
     await clear_queue(chat_id)
 
 
@@ -783,26 +788,21 @@ async def kicked_handler5(_, chat_id: int):
 async def closed_voice_chat_handler1(_, chat_id: int):
     await clear_queue(chat_id)
 
-
 @pytgcalls2.on_closed_voice_chat()
 async def closed_voice_chat_handler2(_, chat_id: int):
     await clear_queue(chat_id)
-
-
+    
 @pytgcalls3.on_closed_voice_chat()
 async def closed_voice_chat_handler3(_, chat_id: int):
     await clear_queue(chat_id)
-
 
 @pytgcalls4.on_closed_voice_chat()
 async def closed_voice_chat_handler4(_, chat_id: int):
     await clear_queue(chat_id)
 
-
 @pytgcalls5.on_closed_voice_chat()
 async def closed_voice_chat_handler5(_, chat_id: int):
     await clear_queue(chat_id)
-
 
 ### Left Handlers
 
@@ -811,21 +811,17 @@ async def closed_voice_chat_handler5(_, chat_id: int):
 async def left_handler1(_, chat_id: int):
     await clear_queue(chat_id)
 
-
 @pytgcalls2.on_left()
 async def left_handler2(_, chat_id: int):
     await clear_queue(chat_id)
-
 
 @pytgcalls3.on_left()
 async def left_handler3(_, chat_id: int):
     await clear_queue(chat_id)
 
-
 @pytgcalls4.on_left()
 async def left_handler4(_, chat_id: int):
     await clear_queue(chat_id)
-
 
 @pytgcalls5.on_left()
 async def left_handler5(_, chat_id: int):
